@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Custom Confirm Window</title>
+  <link rel="stylesheet" type="text/css" href="./dialog-custom.css">
+</head>
+<body>
+
+<button onclick="showDialog('是否安裝應用程式!!')">confirm</button>
+
+<div class="dialog-custom">
+  <div class="dialog-wrapper">
+    <div class="dialog-header">default</div>
+    <div class="dialog-content"></div>
+    <div class="dialog-footer">
+      <button class="dialog-button dialog-button-ok" onclick="sendConfirm(true)">確定</button>
+      <button class="dialog-button dialog-button-cancel" onclick="sendConfirm(false)">取消</button>
+    </div>
+  </div>
+</div>
+
+<script>
+
+  setTimeout(() => {
+    showDialog('是否安裝應用程式!!')
+  }, 1000)
+
+  function showDialog(text) { // 顯示確認視窗
+    const dialog = document.querySelector('.dialog-custom');
+    const dialogHeader = document.querySelector('.dialog-custom .dialog-header');
+    dialogHeader.innerHTML = text || dialogHeader.innerHTML;
+    dialog.style.display = 'block';
+  }
+
+  function sendConfirm(isOK) { // 使用者點選按鈕後
+    const dialog = document.querySelector('.dialog-custom');
+    dialog.style.display = 'none';
+
+    if(isOK) {
+      if(typeof(deferredPrompt) != 'undefined' && deferredPrompt != null){
+       deferredPrompt.prompt();
+      }
+    }
+  }
+</script>
+</body>
+</html>
